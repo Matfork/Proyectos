@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMovimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="Cuenta" />
+                     <p:selectOneMenu value="#{movimientoController.cuenta}" >
+                          <f:selectItems value="#{cuentaController.itemsAvailableSelectOne }"/>
+                   </p:selectOneMenu>
+                    
+                    <h:outputLabel value="#{bundle.CreateMovimientoLabel_idtipomovimiento}" for="idtipomovimiento" />
+                    <h:selectOneMenu id="idtipomovimiento" value="#{movimientoController.selected.idtipomovimiento}" title="#{bundle.CreateMovimientoTitle_idtipomovimiento}" >
+                        <f:selectItems value="#{tipoMovimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="#{bundle.CreateMovimientoLabel_idlocal}" for="idlocal" />
+                    <h:selectOneMenu id="idlocal" value="#{movimientoController.selected.idlocal}" title="#{bundle.CreateMovimientoTitle_idlocal}" >
+                        <f:selectItems value="#{localController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                  
+                    <h:outputLabel value="#{bundle.CreateMovimientoLabel_cantmovimiento}" for="cantmovimiento" />
+                    <h:inputText id="cantmovimiento" value="#{movimientoController.selected.cantmovimiento}" title="#{bundle.CreateMovimientoTitle_cantmovimiento}" />
+                    
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{movimientoController.create}" value="#{bundle.CreateMovimientoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{movimientoController.prepareList}" value="#{bundle.CreateMovimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateMovimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMovimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_nummovimiento}" for="nummovimiento" />
+                    <h:inputText id="nummovimiento" value="#{movimientoController.selected.nummovimiento}" title="#{bundle.EditMovimientoTitle_nummovimiento}" />
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_fechamovimiento}" for="fechamovimiento" />
+                    <h:inputText id="fechamovimiento" value="#{movimientoController.selected.fechamovimiento}" title="#{bundle.EditMovimientoTitle_fechamovimiento}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_cantmovimiento}" for="cantmovimiento" />
+                    <h:inputText id="cantmovimiento" value="#{movimientoController.selected.cantmovimiento}" title="#{bundle.EditMovimientoTitle_cantmovimiento}" />
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_idmovimiento}" for="idmovimiento" />
+                    <h:inputText id="idmovimiento" value="#{movimientoController.selected.idmovimiento}" title="#{bundle.EditMovimientoTitle_idmovimiento}" required="true" requiredMessage="#{bundle.EditMovimientoRequiredMessage_idmovimiento}"/>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_codcuenta}" for="codcuenta" />
+                    <h:inputText id="codcuenta" value="#{movimientoController.selected.codcuenta}" title="#{bundle.EditMovimientoTitle_codcuenta}" />
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_idtipomovimiento}" for="idtipomovimiento" />
+                    <h:selectOneMenu id="idtipomovimiento" value="#{movimientoController.selected.idtipomovimiento}" title="#{bundle.EditMovimientoTitle_idtipomovimiento}" >
+                        <f:selectItems value="#{tipoMovimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_idlocal}" for="idlocal" />
+                    <h:selectOneMenu id="idlocal" value="#{movimientoController.selected.idlocal}" title="#{bundle.EditMovimientoTitle_idlocal}" >
+                        <f:selectItems value="#{localController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMovimientoLabel_idcliente}" for="idcliente" />
+                    <h:selectOneMenu id="idcliente" value="#{movimientoController.selected.idcliente}" title="#{bundle.EditMovimientoTitle_idcliente}" >
+                        <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{movimientoController.update}" value="#{bundle.EditMovimientoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditMovimientoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{movimientoController.prepareList}" value="#{bundle.EditMovimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditMovimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

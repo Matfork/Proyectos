@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTipoCuentaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTipoCuentaLabel_idtipocuenta}" for="idtipocuenta" />
+                    <h:inputText id="idtipocuenta" value="#{tipoCuentaController.selected.idtipocuenta}" title="#{bundle.CreateTipoCuentaTitle_idtipocuenta}" required="true" requiredMessage="#{bundle.CreateTipoCuentaRequiredMessage_idtipocuenta}"/>
+                    <h:outputLabel value="#{bundle.CreateTipoCuentaLabel_tipocuenta}" for="tipocuenta" />
+                    <h:inputText id="tipocuenta" value="#{tipoCuentaController.selected.tipocuenta}" title="#{bundle.CreateTipoCuentaTitle_tipocuenta}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipoCuentaController.create}" value="#{bundle.CreateTipoCuentaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tipoCuentaController.prepareList}" value="#{bundle.CreateTipoCuentaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateTipoCuentaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

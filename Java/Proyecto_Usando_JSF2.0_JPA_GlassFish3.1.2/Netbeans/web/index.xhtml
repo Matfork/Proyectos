@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Pagina Princpal de Administracion</title>
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/index/css/reset.css" />
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/index/css/styles.css" />
+        
+         <!-- Scripts -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/index/js/jquery.roundabout-1.0.min.js"></script> 
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/index/js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript">		
+            $(document).ready(function() { //Start up our Featured Project Carosuel
+                $('#featured ul').roundabout({
+                    easing: 'easeOutInCirc',
+                    duration: 600
+                });
+            });
+        </script>  
+        
+   <!-- <h:outputStylesheet name="css/jsfcrud.css"/>-->
+    </h:head>
+    <h:body>
+        
+            <div id="wrapper" class="container_12 clearfix">
+
+            <!-- Text Logo -->
+            <h1 id="logo" class="grid_4">Banco Eureka</h1>
+
+            <!-- Navigation Menu -->
+            <ul id="navigation" class="grid_8">
+                <li>  <h:form>
+                        <h:commandLink value="CERRAR SESION" action="#{loginBean.irCerrarSession()}"  class="meta" />
+                      </h:form>
+                </li>
+              
+                <li><h:form>
+                        <h:commandLink value="HOME" action="/index"  class="current" />
+                      </h:form>
+                </li>
+                  <li>
+                 <div class="row">
+                     <p><br/><br/> <b>Usuario logueado:</b> #{loginBean.usuarioLogeado.nomusuario } <br/>
+                         <b>Local:</b> #{loginBean.usuarioLogeado.idlocal.nomlocal } </p>
+                </div>
+                </li>
+
+            </ul>
+
+            <div class="hr grid_12">&nbsp;</div>
+            <div class="clear"></div>
+
+            <!-- Caption Line -->
+            <h2 class="grid_12 caption clearfix">Bienvenido a la Intranet de <span>Banco Eureka</span>, aca puedes modificar la informacion de cuentas, clientes. Siempre y cuando sigas las politicas señaladas en el manual</h2>
+
+            <div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
+            <div id="quicknav" class="grid_12">
+                 <h:form>
+                <div class="quicknavgrid_3 quicknav alpha" >
+                    <h4 class="title ">Area de Cruds Principales</h4>
+                     <p>
+                        <h:commandLink action="/views/cliente/List" value="Crud de Cliente"/><br/>
+                        <h:commandLink action="#{cuentaController.irACuentaController}" value="Crud de Cuenta"/>
+                    </p>
+                    
+                    <p style="text-align:center;"><img width="140" height="140" alt="" src="#{facesContext.externalContext.requestContextPath}/resources/index/images/crud.jpg" /></p>
+
+                </div>
+                <div class="quicknavgrid_3 quicknav" >
+                    <h4 class="title ">Area de Administracion</h4>
+                         <p>
+                         <h:commandLink action="/views/movimiento/List" value="Administracion de Movimiento"/><br/>
+                         <h:commandLink action="/views/operacion/List" value="Administracion de Operaciones"/><br/>
+                        </p>
+                    
+                    <p style="text-align:center;"><img width="140" height="140" alt="" src="#{facesContext.externalContext.requestContextPath}/resources/index/images/administracion.png" /></p>
+
+                </div>
+                <div class="quicknavgrid_3 quicknav" >
+                    <h4 class="title ">Area de Reportes</h4>
+                    
+                         <p>
+                            <h:commandLink action="/views/reporte/ReporteMovimientoCuenta" value="Reporte Movimiento"/><br/>
+                            <h:commandLink action="/views/reporte/ReporteOperaciones" value="Reporte Operaciones"/><br/>
+                        </p>
+                    
+                    <p style="text-align:center;"><img width="140" height="140" alt="" src="#{facesContext.externalContext.requestContextPath}/resources/index/images/reportes.png" /></p>
+
+                </div>
+                <div class="quicknavgrid_3 quicknav" >
+                    <h4 class="title ">Otras Areas</h4>
+                    
+                         <p>
+                        <h:commandLink action="/views/local/List" value="Crud de Local"/><br/>
+                        <h:commandLink action="/views/tipoCuenta/List" value="Crud Tipo Cuentas"/><br/>
+                        <h:commandLink action="/views/tipoMovimiento/List" value="Crud Tipo Movimiento"/><br/>
+                        <h:commandLink action="/views/tipoOperacion/List" value="Crud Tipo Operacion"/><br/>
+                        </p>
+                    
+                    <p style="text-align:center;"><img  width="140" height="140" alt="" src="#{facesContext.externalContext.requestContextPath}/resources/index/images/otros.png" /></p>
+                </div>
+                </h:form>
+            </div>
+            <div class="clear"></div>
+
+            <!-- Featured Image Slider -->
+            <div id="featured" class="clearfix grid_12">
+                <ul> 
+                    <li>
+                        <span>Nuestros Trabajadores</span>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/index/images/img1.jpg" alt="" />
+                    </li>  
+                    <li>					
+                        <span>Nuestras Tarjetas</span>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/index/images/img2.jpg" alt="" />
+
+                    </li>  
+                    <li>
+                        <span>Nuestros Locales</span>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/index/images/img3.jpg" alt="" />
+                    </li>  
+                    <li>
+                        <span>Nuestros Operadores</span>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/index/images/img4.jpg" alt="" />					
+                    </li>  
+                    <li>
+
+                        <span>Nuestros Billetes</span>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/index/images/img5.jpg" alt="" />
+
+                    </li>  
+                </ul> 
+            </div>
+            <div class="hr grid_12 clearfix">&nbsp;</div>
+
+            <div class="hr grid_12 clearfix">&nbsp;</div>
+            <!-- Footer -->
+            <p class="grid_12 footer clearfix">
+                <span class="float"><b>&copy; Copyright</b> <a href="#">Daniel Hernandez Vasquez</a></span>
+                <a class="float right" href="#">top</a>
+            </p>
+
+        </div><!--end wrapper-->
+        
+        
+</h:body>
+
+</html>
+

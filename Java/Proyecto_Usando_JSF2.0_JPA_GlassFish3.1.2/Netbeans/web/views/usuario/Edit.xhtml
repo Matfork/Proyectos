@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_idusuario}" for="idusuario" />
+                    <h:inputText id="idusuario" value="#{usuarioController.selected.idusuario}" title="#{bundle.EditUsuarioTitle_idusuario}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idusuario}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nomusuario}" for="nomusuario" />
+                    <h:inputText id="nomusuario" value="#{usuarioController.selected.nomusuario}" title="#{bundle.EditUsuarioTitle_nomusuario}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nick}" for="nick" />
+                    <h:inputText id="nick" value="#{usuarioController.selected.nick}" title="#{bundle.EditUsuarioTitle_nick}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_clave}" for="clave" />
+                    <h:inputText id="clave" value="#{usuarioController.selected.clave}" title="#{bundle.EditUsuarioTitle_clave}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_idlocal}" for="idlocal" />
+                    <h:selectOneMenu id="idlocal" value="#{usuarioController.selected.idlocal}" title="#{bundle.EditUsuarioTitle_idlocal}" >
+                        <f:selectItems value="#{localController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditUsuarioViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditUsuarioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

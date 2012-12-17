@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        
+     
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/index/css/reset.css" />
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/index/css/styles.css" />
+
+       
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+
+    <h:body>
+        <div id="wrapper" class="container_12 clearfix">
+
+            <!-- Text Logo -->
+            <h1 id="logo" class="grid_4">Banco Eureka</h1>
+
+            <!-- Navigation Menu -->
+            <ul id="navigation" class="grid_8">
+                <li>  <h:form>
+                        <h:commandLink value="CERRAR SESION" action="#{loginBean.irCerrarSession()}"  class="meta" />
+                    </h:form>
+                </li>
+
+                <li><h:form>
+                         <h:commandLink value="HOME" action="/index?faces-redirect=true" />
+                    </h:form>
+                </li>
+                <li>
+                    <div class="row">
+                        <p><br/><br/> <b>Usuario logueado:</b> #{loginBean.usuarioLogeado.nomusuario } <br/>
+                            <b>Local:</b> #{loginBean.usuarioLogeado.idlocal.nomlocal } </p>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="hr grid_12">&nbsp;</div>
+            <div class="clear"></div>
+
+            <div class="grid_12">
+            <h1>
+                <ui:insert name="title">Default Title</ui:insert>
+            </h1>
+            </div>
+            <div class="grid_12">
+                <p>
+                    <ui:insert name="body">Default Body</ui:insert>
+                </p>
+            </div>
+            
+        </div>    
+    </h:body>
+
+</html>

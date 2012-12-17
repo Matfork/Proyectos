@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCuentaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCuentaEmpty}" rendered="#{cuentaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{cuentaController.items.rowCount > 0}">
+                    <h:outputText value="#{cuentaController.pagination.pageFirstItem + 1}..#{cuentaController.pagination.pageLastItem + 1}/#{cuentaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{cuentaController.previous}" value="#{bundle.Previous} #{cuentaController.pagination.pageSize}" rendered="#{cuentaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{cuentaController.next}" value="#{bundle.Next} #{cuentaController.pagination.pageSize}" rendered="#{cuentaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{cuentaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_idcuenta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idcuenta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_saldo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.saldo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_clavecuenta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clavecuenta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_flagestado}"/>
+                            </f:facet>
+                            <c:choose>   
+                                <c:when  test="${item.flagestado!=1}">
+                                    <h:outputText value="#{item.flagestado}"/>
+                                </c:when>
+                            </c:choose>   
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_codcuenta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codcuenta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_idusuario}"/>
+                            </f:facet>
+
+                            <h:outputText value="#{item.idusuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_idtipocuenta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idtipocuenta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_idlocal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idlocal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCuentaTitle_idcliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idcliente}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{cuentaController.prepareView}" value="#{bundle.ListCuentaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{cuentaController.prepareEdit}" value="#{bundle.ListCuentaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{cuentaController.destroy}" value="#{bundle.ListCuentaDestroyLink}"/>
+                        </h:column>
+
+                    </h:dataTable>
+
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{cuentaController.prepareCreate}" value="#{bundle.ListCuentaCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListCuentaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

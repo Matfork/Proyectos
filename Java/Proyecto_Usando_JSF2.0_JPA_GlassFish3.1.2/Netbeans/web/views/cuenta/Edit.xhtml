@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCuentaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_idcuenta}" for="idcuenta" />
+                    <h:inputText id="idcuenta" value="#{cuentaController.selected.idcuenta}" title="#{bundle.EditCuentaTitle_idcuenta}" required="true" requiredMessage="#{bundle.EditCuentaRequiredMessage_idcuenta}"/>
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_saldo}" for="saldo" />
+                    <h:inputText id="saldo" value="#{cuentaController.selected.saldo}" title="#{bundle.EditCuentaTitle_saldo}" />
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_clavecuenta}" for="clavecuenta" />
+                    <h:inputText id="clavecuenta" value="#{cuentaController.selected.clavecuenta}" title="#{bundle.EditCuentaTitle_clavecuenta}" />
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_flagestado}" for="flagestado" />
+                    <h:inputText id="flagestado" value="#{cuentaController.selected.flagestado}" title="#{bundle.EditCuentaTitle_flagestado}" />
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_codcuenta}" for="codcuenta" />
+                    <h:inputText id="codcuenta" value="#{cuentaController.selected.codcuenta}" title="#{bundle.EditCuentaTitle_codcuenta}" />
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_idusuario}" for="idusuario" />
+                    <h:selectOneMenu id="idusuario" value="#{cuentaController.selected.idusuario}" title="#{bundle.EditCuentaTitle_idusuario}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_idtipocuenta}" for="idtipocuenta" />
+                    <h:selectOneMenu id="idtipocuenta" value="#{cuentaController.selected.idtipocuenta}" title="#{bundle.EditCuentaTitle_idtipocuenta}" >
+                        <f:selectItems value="#{tipoCuentaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_idlocal}" for="idlocal" />
+                    <h:selectOneMenu id="idlocal" value="#{cuentaController.selected.idlocal}" title="#{bundle.EditCuentaTitle_idlocal}" >
+                        <f:selectItems value="#{localController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCuentaLabel_idcliente}" for="idcliente" />
+                    <h:selectOneMenu id="idcliente" value="#{cuentaController.selected.idcliente}" title="#{bundle.EditCuentaTitle_idcliente}" >
+                        <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{cuentaController.update}" value="#{bundle.EditCuentaSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditCuentaViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{cuentaController.prepareList}" value="#{bundle.EditCuentaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditCuentaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

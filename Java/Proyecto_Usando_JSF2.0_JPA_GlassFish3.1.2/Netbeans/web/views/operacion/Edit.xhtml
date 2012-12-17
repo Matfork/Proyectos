@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOperacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_idoperacion}" for="idoperacion" />
+                    <h:inputText id="idoperacion" value="#{operacionController.selected.idoperacion}" title="#{bundle.EditOperacionTitle_idoperacion}" required="true" requiredMessage="#{bundle.EditOperacionRequiredMessage_idoperacion}"/>
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_fechaoperacion}" for="fechaoperacion" />
+                    <h:inputText id="fechaoperacion" value="#{operacionController.selected.fechaoperacion}" title="#{bundle.EditOperacionTitle_fechaoperacion}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_codcuenta}" for="codcuenta" />
+                    <h:inputText id="codcuenta" value="#{operacionController.selected.codcuenta}" title="#{bundle.EditOperacionTitle_codcuenta}" />
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_idusuario}" for="idusuario" />
+                    <h:selectOneMenu id="idusuario" value="#{operacionController.selected.idusuario}" title="#{bundle.EditOperacionTitle_idusuario}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_idtipooperacion}" for="idtipooperacion" />
+                    <h:selectOneMenu id="idtipooperacion" value="#{operacionController.selected.idtipooperacion}" title="#{bundle.EditOperacionTitle_idtipooperacion}" >
+                        <f:selectItems value="#{tipoOperacionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperacionLabel_idlocal}" for="idlocal" />
+                    <h:selectOneMenu id="idlocal" value="#{operacionController.selected.idlocal}" title="#{bundle.EditOperacionTitle_idlocal}" >
+                        <f:selectItems value="#{localController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{operacionController.update}" value="#{bundle.EditOperacionSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditOperacionViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{operacionController.prepareList}" value="#{bundle.EditOperacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditOperacionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

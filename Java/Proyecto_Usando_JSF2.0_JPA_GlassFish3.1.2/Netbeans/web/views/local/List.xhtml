@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLocalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLocalEmpty}" rendered="#{localController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{localController.items.rowCount > 0}">
+                    <h:outputText value="#{localController.pagination.pageFirstItem + 1}..#{localController.pagination.pageLastItem + 1}/#{localController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{localController.previous}" value="#{bundle.Previous} #{localController.pagination.pageSize}" rendered="#{localController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{localController.next}" value="#{bundle.Next} #{localController.pagination.pageSize}" rendered="#{localController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{localController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLocalTitle_idlocal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idlocal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLocalTitle_nomlocal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomlocal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{localController.prepareView}" value="#{bundle.ListLocalViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{localController.prepareEdit}" value="#{bundle.ListLocalEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{localController.destroy}" value="#{bundle.ListLocalDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{localController.prepareCreate}" value="#{bundle.ListLocalCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListLocalIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

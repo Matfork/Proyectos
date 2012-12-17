@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="title">
+                Reporte de Movimientos por Cuenta
+            </ui:define>
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="body">
+               
+                <h:form>
+                    <!--Mensajes de Error -->
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <p:growl id="growl" />
+                    </h:panelGroup>
+                    <!--Mensajes de Error -->
+                    
+                    <!--Parametros -->
+                    <p:panel header="Selecione:" style="width: 95%; margin-left: auto; margin-right: auto">
+                        <p:panelGrid columns="6">
+                            <h:outputText value="Cuenta" />
+                            <p:selectOneMenu value="#{reporte.cuenta }" >
+                                <f:selectItems value="#{cuentaController.itemsAvailableSelectOne }"/>
+                                </p:selectOneMenu>
+                            <p:commandButton value="Buscar"  update="@form" actionListener="#{reporte.listaMovimiento() }" />
+                        </p:panelGrid>
+                    </p:panel>
+                    <!--Parametros -->
+                    
+                    <!--Tabla -->
+                    <br />
+                    <br />
+                    
+                    <h:panelGroup rendered="#{reporte.listaMovimiento != null }">
+                        <p:dataTable id="tableId" value="#{reporte.listaMovimiento()}"  var="fila" style="width: 95%; margin-left: auto; margin-right: auto"
+                                     widgetVar="Tabla de Reportes 1" emptyMessage="No se encontro informacion de la cuenta solicitada"  >
+                            <f:facet name="header">  
+                                Tabla de Movimientos por cuenta:
+                            </f:facet> 
+                            <p:column  headerText="Cod. Movimiento" sortBy="#{fila.idmovimiento}">
+                                <h:outputText value="#{fila.idmovimiento}" />
+                            </p:column>
+                            <p:column headerText="Numero Movimiento" sortBy="#{fila.nummovimiento}" >
+                                <h:outputText value="#{fila.nummovimiento}"/>
+                            </p:column>
+                            <p:column headerText="Cod. Cliente" sortBy="#{fila.idcliente.idcliente}">
+                                <h:outputText value="#{fila.idcliente.idcliente}"/>
+                            </p:column>
+                            <p:column headerText="Tipo Movimiento" sortBy="#{fila.idtipomovimiento.tipomovimiento}">
+                                <h:outputText value="#{fila.idtipomovimiento.tipomovimiento}"/>
+                            </p:column>
+                            <p:column headerText="Monto" sortBy="#{fila.cantmovimiento}">
+                                <h:outputText value="#{fila.cantmovimiento}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Movimiento" sortBy="#{fila.fechamovimiento}">
+                                <h:outputText value="#{fila.fechamovimiento}"/>
+                            </p:column>
+                            
+                        </p:dataTable>
+                        <br />                      
+                       
+                    </h:panelGroup>
+                    <p:commandButton style=" margin-left: 2%" value="Regresar" action="#{reporte.regresar()}" ajax="false"/>
+                    <!--Tabla -->  
+                </h:form>
+            </ui:define>
+
+           
+
+        </ui:composition>
+
+    </body>
+</html>

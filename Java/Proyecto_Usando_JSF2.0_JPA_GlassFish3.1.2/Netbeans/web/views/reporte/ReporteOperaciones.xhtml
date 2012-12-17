@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="title">
+                Reporte de Operaciones de Cuentas
+            </ui:define>
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="body">
+               
+                <h:form>
+                    <!--Mensajes de Error -->
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <p:growl id="growl" />
+                    </h:panelGroup>
+                    <!--Mensajes de Error -->
+                    
+                    <!--Parametros -->
+                    <p:panel header="Selecione:" style="width: 95%; margin-left: auto; margin-right: auto">
+                        <p:panelGrid columns="6">
+                            <h:outputText value="Elika el Local" />
+                            <p:selectOneMenu value="#{reporte.local }" >
+                                <f:selectItems value="#{localController.itemsAvailableSelectOne }"/>
+                             </p:selectOneMenu>
+                            
+                            <h:outputText value="Elija el Dia" />
+                                <p:calendar value="#{reporte.fecha}" id="popupButtonCal" showOn="button" />  
+                            <p:commandButton value="Buscar"  update="@form" actionListener="#{reporte.listaOperaciones() }" />
+                        </p:panelGrid>
+                    </p:panel>
+                    <!--Parametros -->
+                    
+                    <!--Tabla -->
+                    <br />
+                    <br />
+                    
+                    <h:panelGroup rendered="#{reporte.listaOperaciones != null }">
+                        <p:dataTable id="tableId" value="#{reporte.listaOperaciones()}"  var="fila" style="width: 95%; margin-left: auto; margin-right: auto"
+                                     widgetVar="Tabla de Reportes 1" emptyMessage="No se encontro informacion de la cuenta solicitada"  >
+                            <f:facet name="header">  
+                                Tabla de Movimientos por cuenta:
+                            </f:facet> 
+                            <p:column  headerText="Cod. Operacion" sortBy="#{fila.idoperacion }">
+                                <h:outputText value="#{fila.idoperacion}" />
+                            </p:column>
+                            <p:column headerText="Cod. Usuario" sortBy="#{fila.idusuario.idusuario}" >
+                                <h:outputText value="#{fila.idusuario.idusuario}"/>
+                            </p:column>
+                            <p:column headerText="Cod. Cuenta" sortBy="#{fila.codcuenta }">
+                                <h:outputText value="#{fila.codcuenta}"/>
+                            </p:column>
+                            <p:column headerText="Tipo Operacion" sortBy="#{fila.idtipooperacion.tipooperacion}">
+                                <h:outputText value="#{fila.idtipooperacion.tipooperacion}"/>
+                            </p:column>
+                            <p:column headerText="Local" sortBy="#{fila.idlocal.nomlocal}">
+                                <h:outputText value="#{fila.idlocal.nomlocal}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Ope." sortBy="#{fila.fechaoperacion}">
+                                <h:outputText value="#{fila.fechaoperacion}"/>
+                            </p:column>
+                            
+                            
+                        </p:dataTable>
+                        <br />                      
+                       
+                    </h:panelGroup>
+                    <p:commandButton style=" margin-left: 2%" value="Regresar" action="#{reporte.regresar()}" ajax="false"/>
+                    <!--Tabla -->  
+                </h:form>
+            </ui:define>
+
+           
+
+        </ui:composition>
+
+    </body>
+</html>

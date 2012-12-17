@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMovimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_nummovimiento}"/>
+                    <h:outputText value="#{movimientoController.selected.nummovimiento}" title="#{bundle.ViewMovimientoTitle_nummovimiento}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_fechamovimiento}"/>
+                    <h:outputText value="#{movimientoController.selected.fechamovimiento}" title="#{bundle.ViewMovimientoTitle_fechamovimiento}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_cantmovimiento}"/>
+                    <h:outputText value="#{movimientoController.selected.cantmovimiento}" title="#{bundle.ViewMovimientoTitle_cantmovimiento}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_idmovimiento}"/>
+                    <h:outputText value="#{movimientoController.selected.idmovimiento}" title="#{bundle.ViewMovimientoTitle_idmovimiento}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_codcuenta}"/>
+                    <h:outputText value="#{movimientoController.selected.codcuenta}" title="#{bundle.ViewMovimientoTitle_codcuenta}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_idtipomovimiento}"/>
+                    <h:outputText value="#{movimientoController.selected.idtipomovimiento.tipomovimiento}" title="#{bundle.ViewMovimientoTitle_idtipomovimiento}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_idlocal}"/>
+                    <h:outputText value="#{movimientoController.selected.idlocal.nomlocal}" title="#{bundle.ViewMovimientoTitle_idlocal}"/>
+                    <h:outputText value="#{bundle.ViewMovimientoLabel_idcliente}"/>
+                    <h:outputText value="#{movimientoController.selected.idcliente.nombrecompleto}" title="#{bundle.ViewMovimientoTitle_idcliente}"/>
+                </h:panelGrid>
+                <br />
+              
+                <h:commandLink action="#{movimientoController.prepareList}" value="#{bundle.ViewMovimientoShowAllLink}"/>
+                <br />
+              
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
