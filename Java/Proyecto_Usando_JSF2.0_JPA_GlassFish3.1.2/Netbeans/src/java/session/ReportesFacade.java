@@ -45,12 +45,12 @@ public class ReportesFacade extends AbstractFacade<Reporte> {
            List<Movimiento> listaMovimiento = new ArrayList<Movimiento>();
            Movimiento mov = null;
         
-            //DECLARACION DE INSTANCIAS NECESARIAS PARA EL USO DE ECLIPSE.LINK
+     
             JpaEntityManager jpaEntityManager = JpaHelper.getEntityManager(em);
             Session session = jpaEntityManager.getActiveSession();
             DataReadQuery queryRead = new DataReadQuery();  
             
-            //DECLARAMOS EL NOMBRE DEL PROCEDURE Y ESPECIFICAMOS SUS CAMPOS
+        
             StoredProcedureCall call = new StoredProcedureCall();
             call.setProcedureName("p_reportes_movimiento_cuenta");              
             call.addNamedArgument("p_codCuenta", "p1");               
@@ -63,7 +63,7 @@ public class ReportesFacade extends AbstractFacade<Reporte> {
             queryArgs.add(codCuenta);              
             queryRead.bindAllParameters();  
 
-            List rs = (List) session.executeQuery(queryRead, queryArgs);  //Ejecutamos el procedure, se devuelve en una lista la informacion
+            List rs = (List) session.executeQuery(queryRead, queryArgs);  
             List<DatabaseRecord> lista = new ArrayList<DatabaseRecord>();  
             
               for(int i=0; i<rs.size(); i++){                
